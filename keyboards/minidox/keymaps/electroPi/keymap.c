@@ -2,6 +2,13 @@
 
 extern keymap_config_t keymap_config;
 
+extern rgblight_config_t rgblight_config;
+
+uint32_t mode;
+uint16_t hue;
+uint8_t sat;
+uint8_t val;
+
 
 // Each layer gets a name for readability, which is then used in the keymap matrix below.
 // The underscores don't mean anything - you can have a layer called STUFF or any other name.
@@ -12,7 +19,7 @@ extern keymap_config_t keymap_config;
 #define _RAISE 2
 #define _ADJUST 16
 
-enum custom_keycodes {
+enum custom_keycode {
   COLEMAK = SAFE_RANGE,
   LOWER,
   RAISE,
@@ -69,7 +76,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_1,    KC_2,    KC_3,    KC_4,    KC_5,         KC_6,    KC_7,    KC_8,    KC_9,    KC_0,
   KC_ESC,  KC_COLN, _______, KC_EXLM, _______,      KC_TILD, KC_UNDS, KC_EQL,  KC_PIPE, KC_DQT,
   KC_TAB,  KC_F3,   KC_F4,   KC_F5,   KC_F6,        KC_GRV,  KC_MINS, KC_PLUS, KC_BSLS, KC_QUOT,
-                    _______, _______, _______,      _______, _______, _______
+                    _______, _______, RESET,      _______, _______, _______
 ),
 
 
@@ -131,10 +138,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
 #ifdef RGBLIGHT_ENABLE
+
 void keyboard_post_init_user(void) {
   rgblight_enable_noeeprom(); // Enables RGB, without saving settings
   rgblight_sethsv_noeeprom(HSV_BLUE);
   rgblight_mode_noeeprom(RGBLIGHT_MODE_STATIC_LIGHT);
+  mode = rgblight_config.mode;
 }
 
 
@@ -171,6 +180,16 @@ layer_state_t layer_state_set_user(layer_state_t state) {
   return state;
 }
 
+/* This function is used to set the first LED as a CAPS LOCK inticator. */
+void led_set_user(uint8_t usb_led) {
 
+    mode = rgblight_get_mode();
+    if (usb_led & (1<<USB_LED_CAPS_LOCK)) {
+        rgblight_mode_noeeprom(1);
+        rgblight_setrgb_at(0xEE, 0xFF, 0x41, 0);
+    } else {
+        rgblight_mode(mode);
+    }
+}
 
 #endif
