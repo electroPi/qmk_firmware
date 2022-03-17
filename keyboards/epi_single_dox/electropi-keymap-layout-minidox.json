@@ -1,0 +1,257 @@
+[
+  {
+    "backcolor": "#262222",
+    "name": "electroPi - MiniDox",
+    "author": "electroPi",
+    "background": {
+      "name": "Mahogany Red",
+      "style": "background-image: url('/bg/wood/Red_Mahogany_Wood.jpg');"
+    },
+    "radii": "40px",
+    "switchMount": "cherry",
+    "switchBrand": "kailh",
+    "switchType": "PG151101D05/D43",
+    "plate": true
+  },
+  [
+    {
+      "x": 2,
+      "c": "#60a0d1",
+      "t": "#000000\n\n#dd1126\n#edff1c\n#000000",
+      "f": 4
+    },
+    "F\n\n#\n3\nF3",
+    {
+      "x": 6.5
+    },
+    "U\n\n*\n8\nF8"
+  ],
+  [
+    {
+      "y": -0.87,
+      "x": 1
+    },
+    "W\n\n@\n2\nF2",
+    {
+      "x": 1
+    },
+    "P\n\n$\n4\nF4",
+    {
+      "x": 4.5
+    },
+    "L\n\n&\n7\nF7",
+    {
+      "x": 1
+    },
+    "Y\n\n(\n9\nF9"
+  ],
+  [
+    {
+      "y": -0.8799999999999999,
+      "x": 4
+    },
+    "G\n\n%\n5\nF5",
+    {
+      "x": 2.5
+    },
+    "J\n\n^\n6\nF6"
+  ],
+  [
+    {
+      "y": -0.87,
+      "t": "#000000\n\n#ff1f1f\n#edff1c\n#000000",
+      "f": 6
+    },
+    "\n\n!\n1\nF1\n\nQ",
+    {
+      "x": 10.5,
+      "t": "#000000\n\n#dd1126\n#edff1c\n#000000",
+      "f": 4
+    },
+    ";\n:\n)\n0\nF10"
+  ],
+  [
+    {
+      "y": -0.3799999999999999,
+      "x": 2,
+      "t": "#000000\n\n#dd1126"
+    },
+    "S\n\n<i class='kb kb-Arrows-Up'></i>",
+    {
+      "x": 6.5,
+      "t": "#000000\n#edff1c\n\n\n\n\n#dd1126",
+      "a": 5
+    },
+    "E\n=\n\n\nVol+\n\nPgUp"
+  ],
+  [
+    {
+      "y": -0.8700000000000001,
+      "x": 1,
+      "t": "#000000\n\n#dd1126\n#edff1c",
+      "a": 4
+    },
+    "R\n\n\n:\nF12",
+    {
+      "x": 1,
+      "n": true
+    },
+    "T\n\n\n!",
+    {
+      "x": 4.5,
+      "t": "#000000\n#edff1c\n\n\n\n\n#dd1126",
+      "a": 5,
+      "n": true
+    },
+    "N\n_\n\n\nVol-\n\nHome",
+    {
+      "x": 1,
+      "t": "#000000\n\n#dd1126\n#edff1c",
+      "a": 4
+    },
+    "I\n\n{\n|\nMail"
+  ],
+  [
+    {
+      "y": -0.8799999999999999,
+      "x": 4,
+      "t": "#000000\n\n#dd1126"
+    },
+    "D",
+    {
+      "x": 2.5,
+      "t": "#000000\n\n#dd1126\n#edff1c"
+    },
+    "H\n\nIns\n~\nMute"
+  ],
+  [
+    {
+      "y": -0.8700000000000001,
+      "t": "#000000\n\n#dd1126\n#edff1c\n#000000"
+    },
+    "A\n\nesc\nesc\nF11",
+    {
+      "x": 10.5,
+      "t": "#000000\n\n#dd1126\n#edff1c"
+    },
+    "O\n\n}\n\"\nCalc"
+  ],
+  [
+    {
+      "y": -0.3799999999999999,
+      "x": 2
+    },
+    "C\n\n<i class='kb kb-Arrows-Down'></i>\nF4",
+    {
+      "x": 6.5,
+      "t": "#000000\n\n#dd1126\n#edff1c\n\n\n\n#dd1126"
+    },
+    ",\n<\n\n+\nPlay\n\n\nPgDn"
+  ],
+  [
+    {
+      "y": -0.8700000000000001,
+      "x": 1,
+      "t": "#000000\n\n#dd1126\n#edff1c"
+    },
+    "X\n\n<i class='kb kb-Arrows-Left'></i>\nF3",
+    {
+      "x": 1
+    },
+    "V\n\n<i class='kb kb-Arrows-Right'></i>\nF5",
+    {
+      "x": 4.5,
+      "t": "#000000\n#edff1c\n\n\n\n\n#dd1126",
+      "a": 5
+    },
+    "M\n-\n\n\nStop\n\nEnd",
+    {
+      "x": 1,
+      "t": "#000000\n\n#dd1126\n#edff1c",
+      "a": 4
+    },
+    ".\n>\n[\n\\\nNext"
+  ],
+  [
+    {
+      "y": -0.8799999999999999,
+      "x": 4,
+      "t": "#000000\n\n\n#edff1c"
+    },
+    "B\n\n\nF6\nPrtScr",
+    {
+      "x": 2.5,
+      "t": "#000000\n\n#dd1126\n#edff1c"
+    },
+    "K\n\nDel\n`\nPrev"
+  ],
+  [
+    {
+      "y": -0.8700000000000001
+    },
+    "Z\n\ntab\ntab\nReset",
+    {
+      "x": 10.5
+    },
+    "/\n?\n]\n'\nLock"
+  ],
+  [
+    {
+      "rx": 13,
+      "ry": 4.25,
+      "y": -1.0099999999999998,
+      "x": -10.620000000000001,
+      "c": "#8d242f",
+      "t": "#ffffff\n#b3b3b3",
+      "a": 5,
+      "f": 3
+    },
+    "Shift\nCpsLck",
+    {
+      "x": 5.73,
+      "t": "#ffffff",
+      "f": 4
+    },
+    "<i class='kb kb-logo-linux-tux-ibm'></i>\nSuper"
+  ],
+  [
+    {
+      "r": 15,
+      "rx": 6.5,
+      "y": -0.20000000000000018,
+      "x": -3.04,
+      "c": "#edff1c",
+      "t": "#2b2525\n#292323"
+    },
+    "BSpc\nLower"
+  ],
+  [
+    {
+      "r": 30,
+      "y": -0.5499999999999998,
+      "x": -1.79,
+      "c": "#8d242f",
+      "t": "#ffffff\n#b3b3b3"
+    },
+    "Space\nCtrl"
+  ],
+  [
+    {
+      "r": -30,
+      "y": -1.25,
+      "x": 0.34999999999999964,
+      "t": "#ffffff"
+    },
+    "Alt\nEnter"
+  ],
+  [
+    {
+      "r": -15,
+      "y": -1.35,
+      "x": 1.5500000000000007,
+      "c": "#dd1126",
+      "t": "#0a080a\n#170f0f"
+    },
+    "Del\nRaise"
+  ]
+]
