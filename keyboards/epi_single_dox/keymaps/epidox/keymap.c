@@ -61,9 +61,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,----------------------------------.           ,----------------------------------.
  * |   1  |   2  |   3  |   4  |   5  |           |   6  |   7  |   8  |   9  |   0  |
  * |------+------+------+------+------|           |------+------+------+------+------|
- * |  Esc |   :  |      |   !  |      |           |   ~  |   _  |   =  |   |  |   "  |
+ * |  Esc |   :  |      |   !  |      |           |   ~  |   -  |   =  |   |  |   "  |
  * |------+------+------+------+------|           |------+------+------+------+------|
- * |  Tab |  F3  |  F4  |  F5  |  F6  |           |   `  |   -  |   +  |   \  |   '  |
+ * |  Tab |  F3  |  F4  |  F5  |  F6  |           |   `  |   _  |   +  |   \  |   '  |
  * `----------------------------------'           `----------------------------------'
  *             ,-------------------------.    ,------,-----------------.
  *             | Shift| LOWER/Bksp| CTL  |    | Alt  | DEL/RAISE| LGUI |
@@ -74,17 +74,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_LOWER] = LAYOUT( \
   KC_1,    KC_2,    KC_3,    KC_4,    KC_5,         KC_6,    KC_7,    KC_8,    KC_9,    KC_0,
-  KC_ESC,  KC_COLN, _______, KC_EXLM, _______,      KC_TILD, KC_UNDS, KC_EQL,  KC_PIPE, KC_DQT,
-  KC_TAB,  KC_F3,   KC_F4,   KC_F5,   KC_F6,        KC_GRV,  KC_MINS, KC_PLUS, KC_BSLS, KC_QUOT,
+  KC_ESC,  KC_COLN, _______, KC_EXLM, _______,      KC_TILD, KC_MINS, KC_EQL,  KC_PIPE, KC_DQT,
+  KC_TAB,  KC_F3,   KC_F4,   KC_F5,   KC_F6,        KC_GRV,  KC_UNDS, KC_PLUS, KC_BSLS, KC_QUOT,
                     _______, _______, RESET,      _______, _______, _______
 ),
 
 
 /* Raise
- * 
+ *
  *  It is the raised layer, because I have the ctrl on the left hand side, the raise on
- *  the right hand side, and the navigations on the left hand side again. 
- * 
+ *  the right hand side, and the navigations on the left hand side again.
+ *
  * ,----------------------------------.           ,----------------------------------.
  * |   !  |   @  |   #  |   $  |   %  |           |   ^  |   &  |   *  |   (  |   )  |
  * |------+------+------+------+------|           |------+------+------+------+------|
@@ -102,7 +102,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_RAISE] = LAYOUT( \
   KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,      KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN,
   KC_ESC,  _______, KC_UP,   _______, _______,      KC_INS,  KC_HOME, KC_PGUP, KC_LCBR, KC_RCBR,
-  KC_TAB,  KC_LEFT, KC_DOWN, KC_RGHT, _______,      KC_DEL,  KC_END,  KC_PGDN, KC_LBRC, KC_RBRC, 
+  KC_TAB,  KC_LEFT, KC_DOWN, KC_RGHT, _______,      KC_DEL,  KC_END,  KC_PGDN, KC_LBRC, KC_RBRC,
                     _______, _______, _______,      _______,  _______,  _______
 ),
 
@@ -123,7 +123,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *             `------------------| Space|    | ENTER|----------+------.
  *                                |      |    |      |
  *                                `------'    `------'
- * 
+ *
  * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
  * DO NOT DELETE THE: RESET KEY!!!!! IT HELPS TO PROGRAM THE BOARD!!!!
  * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -131,7 +131,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_ADJUST] =  LAYOUT( \
   KC_F1,   KC_F2,   KC_F3,   KC_F4,    KC_F5,        KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,
   KC_F11,  KC_F12,  _______, KC_ASON,  _______,      KC_MUTE, KC_VOLD, KC_VOLU, KC_MAIL, KC_CALC,
-  RESET,   _______, _______, KC_ASOFF, KC_PSCR,      KC_MPRV, KC_MSTP, KC_MPLY, KC_MNXT, CALTDEL,
+  RESET,   RGB_TOG, _______, KC_ASOFF, KC_PSCR,      KC_MPRV, KC_MSTP, KC_MPLY, KC_MNXT, CALTDEL,
                     _______, _______,  _______,      _______,  _______, _______
 )
 };
@@ -149,9 +149,9 @@ void keyboard_post_init_user(void) {
 
 /* This function is handling the layers color updates. */
 layer_state_t layer_state_set_user(layer_state_t state) {
-  
+
   state = update_tri_layer_state(state, _RAISE, _LOWER, _ADJUST);
-  
+
   if (rgblight_is_enabled()) {
     switch(biton32(state)) {
     case 0:
