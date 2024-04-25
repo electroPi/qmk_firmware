@@ -23,7 +23,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define VENDOR_ID       0xFEED
 #define PRODUCT_ID      0x3060
 #define MANUFACTURER    electroPi
-#define PRODUCT         ePi-Single-Dox Keyboard
+#define PRODUCT         ePi-Single-Dox
 
 /* key matrix size */
 #define MATRIX_ROWS 4

@@ -7,6 +7,8 @@ A compact version of the ErgoDox
 * Keyboard Maintainer: That-Canadian
 * Hardware Supported: MiniDox PCB rev1 Pro Micro
 
+make epi_single_dox/rev1:epidox:avrdude
+
 Make example for this keyboard (after setting up your build environment):
 
     make minidox/rev1:default
