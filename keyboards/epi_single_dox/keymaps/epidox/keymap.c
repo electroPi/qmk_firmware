@@ -3,29 +3,29 @@
 extern keymap_config_t keymap_config;
 
 extern rgblight_config_t rgblight_config;
+#include "keymap_romanian.h"
+#include "keymap_hungarian.h"
 
 uint32_t mode;
-uint16_t hue;
-uint8_t sat;
-uint8_t val;
 
-#undef COLEMAK_LAYOUT
-//#define COLEMAK_LAYOUT (1)
+bool baseCol = false;
 
 // Each layer gets a name for readability, which is then used in the keymap matrix below.
 // The underscores don't mean anything - you can have a layer called STUFF or any other name.
 // Layer names don't all need to be of the same length, obviously, and you can also skip them
 // entirely and just use numbers.
 #define _COLEMAK 0
-#define _LOWER 1
-#define _RAISE 2
+#define _QWERTY 1
+#define _LOWER 2
+#define _RAISE 3
 #define _ADJUST 16
 
 enum custom_keycode {
-  COLEMAK = SAFE_RANGE,
-  LOWER,
-  RAISE,
-  ADJUST,
+  KC_COLEMAK = SAFE_RANGE,
+  KC_QWERTY,
+  KC_LOWER,
+  KC_RAISE,
+  KC_ADJUST,
 };
 
 // Defines for task manager and such
@@ -34,7 +34,6 @@ enum custom_keycode {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
-#ifdef COLEMAK_LAYOUT
 /* Colemak
  *
  * ,----------------------------------.           ,----------------------------------.
@@ -55,9 +54,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_Q,    KC_W,    KC_F,    KC_P,    KC_G,         KC_J,    KC_L,    KC_U,     KC_Y,    KC_SCLN,
   KC_A,    KC_R,    KC_S,    KC_T,    KC_D,         KC_H,    KC_N,    KC_E,     KC_I,    KC_O,
   KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,         KC_K,    KC_M,    KC_COMM,  KC_DOT,  KC_SLSH,
-    LSFT_T(KC_CAPS), LT(_LOWER, KC_BSPC), CTL_T(KC_SPC),     RALT_T(KC_ENT), LT(_RAISE, KC_DEL), KC_LGUI
+    LSFT_T(KC_CAPS), LT(_LOWER, KC_BSPC), CTL_T(KC_SPC),     LALT_T(KC_ENT), LT(_RAISE, KC_DEL), KC_LGUI
 ),
-#else
 
 /* Qwerty
  *
@@ -75,13 +73,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                                |      |    |      |
  *                                `------'    `------'
  */
-[_COLEMAK] = LAYOUT( \
+[_QWERTY] = LAYOUT( \
   KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,         KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,
   KC_A,    KC_S,    KC_D,    KC_F,    KC_G,         KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN,
   KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,         KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,
     LSFT_T(KC_CAPS), LT(_LOWER, KC_BSPC), CTL_T(KC_SPC),     RALT_T(KC_ENT), LT(_RAISE, KC_DEL), KC_LGUI
 ),
-#endif
+
 /* Lower
  *
  * ,----------------------------------.           ,----------------------------------.
@@ -102,7 +100,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_1,    KC_2,    KC_3,    KC_4,    KC_5,         KC_6,    KC_7,    KC_8,    KC_9,    KC_0,
   KC_ESC,  KC_COLN, _______, KC_EXLM, _______,      KC_TILD, KC_MINS, KC_EQL,  KC_PIPE, KC_DQT,
   KC_TAB,  KC_F3,   KC_F4,   KC_F5,   KC_F6,        KC_GRV,  KC_UNDS, KC_PLUS, KC_BSLS, KC_QUOT,
-                    _______, _______, RESET,      _______, _______, _______
+                    _______, _______, _______,      _______, _______, _______
 ),
 
 
@@ -136,13 +134,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* Adjust (Lower + Raise)
  *
- * ,-----------------------------------.           ,----------------------------------.
- * |  F1  |  F2  |  F3  |  F4   |  F5  |           |   F6 |  F7  |  F8  |  F9  |  F10 |
- * |------+------+------+-------+------|           |------+------+------+------+------|
- * |  F11 |  F12 |      |KC_ASON|      |           | Mute | Vol- | Vol+ | Mail | Calc |
- * |------+------+------+-------+------|           |------+------+------+------+------|
- * | Reset|      |      |KC_ASOF| Pscr |           | Prev | Stop | Play | Next |caltde|
- * `----------------------------------'           `----------------------------------'
+ * ,------------------------------------.           ,----------------------------------.
+ * |  F1  |  F2   |  F3  |  F4   |  F5  |           |   F6 |  F7  |  F8  |  F9  |  F10 |
+ * |------+-------+------+-------+------|           |------+------+------+------+------|
+ * |  F11 |  F12  |      |KC_ASON|      |           | Mute | Vol- | Vol+ | Mail | Calc |
+ * |------+-------+------+-------+------|           |------+------+------+------+------|
+ * | Reset|RGB_TOG|      |KC_ASOF| Pscr |           | Prev | Stop | Play | Next |caltde|
+ * `------------------------------------'           `----------------------------------'
  *             ,-------------------------.    ,------,-----------------.
  *             | Shift| LOWER/Bksp| CTL  |    | Alt  | DEL/RAISE| LGUI |
  *             | Caps |           |      |    |      |          |      |
@@ -156,8 +154,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_ADJUST] =  LAYOUT( \
   KC_F1,   KC_F2,   KC_F3,   KC_F4,    KC_F5,        KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,
-  KC_F11,  KC_F12,  _______, KC_ASON,  _______,      KC_MUTE, KC_VOLD, KC_VOLU, KC_MAIL, KC_CALC,
-  RESET,   RGB_TOG, _______, KC_ASOFF, KC_PSCR,      KC_MPRV, KC_MSTP, KC_MPLY, KC_MNXT, CALTDEL,
+  KC_F11,  KC_F12,  KC_QWERTY, KC_ASON,  _______,      KC_MUTE, KC_VOLD, KC_VOLU, KC_MAIL, KC_CALC,
+  RESET,   RGB_TOG, KC_COLEMAK, KC_ASOFF, KC_PSCR,      KC_MPRV, KC_MSTP, KC_MPLY, KC_MNXT, CALTDEL,
                     _______, _______,  _______,      _______,  _______, _______
 )
 };
@@ -183,17 +181,21 @@ layer_state_t layer_state_set_user(layer_state_t state) {
     case 0:
       // Blue
       rgblight_enable_noeeprom();
-      rgblight_sethsv_noeeprom(HSV_BLUE);
+      if (!baseCol){
+          rgblight_sethsv_noeeprom(HSV_BLUE);
+      } else {
+          rgblight_sethsv_noeeprom(HSV_CYAN);
+      }
       break;
     case 1:
-      // Green
-      rgblight_enable_noeeprom();
-      rgblight_sethsv_noeeprom(HSV_GREEN);
-      break;
-    case 2:
       // Red
       rgblight_enable_noeeprom();
       rgblight_sethsv_noeeprom(HSV_RED);
+      break;
+    case 2:
+      // Green
+      rgblight_enable_noeeprom();
+      rgblight_sethsv_noeeprom(HSV_GREEN);
       break;
     default:
       // Orange
@@ -219,3 +221,24 @@ void led_set_user(uint8_t usb_led) {
 }
 
 #endif
+
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record)
+{
+    switch(keycode) {
+        case KC_QWERTY:
+            if (record->event.pressed) {
+                set_single_persistent_default_layer(_QWERTY);
+                baseCol=true;
+            }
+            return false;
+        case KC_COLEMAK:
+            if (record->event.pressed) {
+                set_single_persistent_default_layer(_COLEMAK);
+                baseCol = false;
+            }
+        return false;
+    }
+    return true;
+}
+
