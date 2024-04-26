@@ -9,6 +9,8 @@ uint16_t hue;
 uint8_t sat;
 uint8_t val;
 
+#undef COLEMAK_LAYOUT
+//#define COLEMAK_LAYOUT (1)
 
 // Each layer gets a name for readability, which is then used in the keymap matrix below.
 // The underscores don't mean anything - you can have a layer called STUFF or any other name.
@@ -17,10 +19,15 @@ uint8_t val;
 #define _COLEMAK 0
 #define _LOWER 1
 #define _RAISE 2
+#define _QWERTY 3
 #define _ADJUST 16
 
 enum custom_keycode {
-  COLEMAK = SAFE_RANGE,
+#ifdef COLEMAK_LAYOUT
+    COLEMAK = SAFE_RANGE,
+#else
+  QWERTY = SAFE_RANGE,
+#endif
   LOWER,
   RAISE,
   ADJUST,
@@ -56,6 +63,29 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 
 
+/* Qwerty
+ *
+ * ,----------------------------------.           ,----------------------------------.
+ * |   Q  |   W  |   E  |   R  |   T  |           |   Y  |   U  |   I  |   O  |   P  |
+ * |------+------+------+------+------|           |------+------+------+------+------|
+ * |   A  |   S  |   D  |   F  |   G  |           |   H  |   J  |   K  |   L  |   ;  |
+ * |------+------+------+------+------|           |------+------+------+------+------|
+ * |   Z  |   X  |   C  |   V  |   B  |           |   N  |   M  |   ,  |   .  |   /  |
+ * `----------------------------------'           `----------------------------------'
+ *             ,-------------------------.    ,------,-----------------.
+ *             | Shift| LOWER/Bksp| CTL  |    | Alt  | DEL/RAISE| LGUI |
+ *             | Caps |           |      |    |      |          |      |
+ *             `------------------| Space|    | ENTER|----------+------.
+ *                                |      |    |      |
+ *                                `------'    `------'
+ */
+[_QWERTY] = LAYOUT( \
+  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,         KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,
+  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,         KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN,
+  KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,         KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,
+    LSFT_T(KC_CAPS), LT(_LOWER, KC_BSPC), CTL_T(KC_SPC),     RALT_T(KC_ENT), LT(_RAISE, KC_DEL), KC_LGUI
+),
+
 /* Lower
  *
  * ,----------------------------------.           ,----------------------------------.
@@ -81,10 +111,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
 /* Raise
- * 
+ *
  *  It is the raised layer, because I have the ctrl on the left hand side, the raise on
- *  the right hand side, and the navigations on the left hand side again. 
- * 
+ *  the right hand side, and the navigations on the left hand side again.
+ *
  * ,----------------------------------.           ,----------------------------------.
  * |   !  |   @  |   #  |   $  |   %  |           |   ^  |   &  |   *  |   (  |   )  |
  * |------+------+------+------+------|           |------+------+------+------+------|
@@ -102,7 +132,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_RAISE] = LAYOUT( \
   KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,      KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN,
   KC_ESC,  _______, KC_UP,   _______, _______,      KC_INS,  KC_HOME, KC_PGUP, KC_LCBR, KC_RCBR,
-  KC_TAB,  KC_LEFT, KC_DOWN, KC_RGHT, _______,      KC_DEL,  KC_END,  KC_PGDN, KC_LBRC, KC_RBRC, 
+  KC_TAB,  KC_LEFT, KC_DOWN, KC_RGHT, _______,      KC_DEL,  KC_END,  KC_PGDN, KC_LBRC, KC_RBRC,
                     _______, _______, _______,      _______,  _______,  _______
 ),
 
@@ -123,7 +153,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *             `------------------| Space|    | ENTER|----------+------.
  *                                |      |    |      |
  *                                `------'    `------'
- * 
+ *
  * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
  * DO NOT DELETE THE: RESET KEY!!!!! IT HELPS TO PROGRAM THE BOARD!!!!
  * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -149,9 +179,9 @@ void keyboard_post_init_user(void) {
 
 /* This function is handling the layers color updates. */
 layer_state_t layer_state_set_user(layer_state_t state) {
-  
+
   state = update_tri_layer_state(state, _RAISE, _LOWER, _ADJUST);
-  
+
   if (rgblight_is_enabled()) {
     switch(biton32(state)) {
     case 0:
